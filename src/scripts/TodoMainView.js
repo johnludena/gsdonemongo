@@ -24,6 +24,7 @@ const TodoMainView = React.createClass({
             console.log('payload>>>', payload)
             console.log('collection state is now>>>', this.state.todoColl)
         })
+        console.log('collection is now:', this.state.todoColl)
     },
 
     render: function() { 
@@ -107,7 +108,7 @@ const SingleTodo = React.createClass({
                     
                     {/*<button onClick={this._destroyTodo}>X</button>*/}
                     <input className="todo-check" type="checkbox" onClick={this._markComplete} />
-                    <span className="todo">{this.props.todoModel.get('name')}</span>
+                    <span className="todo">{this.props.todoModel.get('todo')}</span>
                     
                 </div>
             )
