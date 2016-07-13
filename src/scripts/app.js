@@ -1,15 +1,18 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
+import React from 'react'
+import Backbone from 'backbone'
+import TodoMainView from './TodoMainView'
+import {TodoModel} from './models'
+import {TodoCollection} from './models'
+
 
 const app = function() {
 
-	const Header = React.createClass({
-		render: () => {
-			return <h1>YOLO</h1>
-		}
-	})
+    var todoColl = new TodoCollection()
 
-	ReactDOM.render(<Header/>,document.querySelector('.container'))
+    todoColl.fetch()
+
+	ReactDOM.render(<TodoMainView todoColl={todoColl} />, document.querySelector('.container'))
 }
 
 app()

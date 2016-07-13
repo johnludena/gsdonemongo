@@ -8,13 +8,12 @@ const usersSchema = new Schema({
     password: String,
 })
 
-const postsSchema = new Schema({
-  title: String, 
-  body: String,
-  user: Object
+
+const todoSchema = new Schema({
+	todo: String,
 })
 
 module.exports = {
   User: createModel('User', usersSchema),
-  Post: createModel('Post', postsSchema)
+  Todo: createModel('Todo', todoSchema)
 }

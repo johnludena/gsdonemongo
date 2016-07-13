@@ -3,8 +3,62 @@
 	box-sizing: border-box;
 }
 
-h1 {
-	font-size: 300px;
-	text-align: center;
-	color: fuchsia;
+$text: #828b94;
+$primary-color: #645bb7;
+
+
+body {
+    background: #e4e5e7;
+    color: $text;
+}
+
+
+#user-input {
+    padding: 2%;
+    border: 3px solid #dadada;
+    transition: .5s border ease;
+    font-size: 2.5rem;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    width: 100%
+}
+
+#user-input:focus {
+    outline: none;
+    border: 3px solid $primary-color;
+}
+
+#todo-list {
+    margin: 2em auto;
+}
+
+.todo-check {
+    margin-right: 10px;
+}
+
+.done, .undone {
+    font-size: 1.5rem;
+    padding: 13px 0;
+    border-bottom: 2px solid #e0e1e3;
+}
+
+.done:after {
+    font-family: FontAwesome;
+    content:'\f118';
+    float: right;
+    font-size: 20px;
+}
+
+
+
+@media screen and (min-width: 800px) {
+    #inner-container {
+        margin: 240px auto 0;
+        max-width: 480px;
+    }
+
+    #todo-list {
+        width: 100%;
+    }
 }

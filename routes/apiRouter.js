@@ -1,58 +1,59 @@
 let Router = require('express').Router;
 const apiRouter = Router()
 
-let User = require('../db/schema.js').User
-let Post = require('../db/schema.js').Post
+let Todo = require('../db/schema.js').Todo
 
-
-apiRouter.get('/users', function(req, res){
-  User.find({}, function(err, results){
-    res.json(results)
+apiRouter.get('/todos', function(request, response){
+  Todo.find({}, function(err, records){
+      if(err) {
+        console.log(err)
+        response.json({
+          error: err
+        })
+      }
+      else {
+        response.json(records)
+      }
+      
   })
 })
 
-//read many
-apiRouter.get('/posts/', function(req, res){
-  Post.find(req.query, function(err, results){
-    res.json(results)
-  })
-})
-
-//read one
-apiRouter.get('/posts/:_id', function(req, res){
-  Post.findOne(req.params, function(err, result){
-    res.json(result)
-  })
-})
-
-//create one
-apiRouter.post('/posts', function(req, res){
-  let newPost = new Post(req.body)
-  newPost.save(function(err){
-    if(err) return res.json({message: 'error saving'})
-      res.json(newPost)
-  })
-})
-
-//update one
-apiRouter.put('/posts/:_id', function(req,res) {
-  Post.findOne(req.params, function(err,record) {
-    for (var prop in req.body) {
-      record[prop] = req.body[prop]
+apiRouter.post('/todos', function(request,response){
+  let newTodo = new Todo(request.body)
+  newTodo.save(function(err){
+    // If error exits, console log it and send it to client
+    if (err) {
+      console.log(err)
+      response.send(err)
     }
-    record.save(function(err){
-      if(err) return res.json({message: 'error saving'})
-      res.json(record)
-    })
+
+    // Else, send response with newRecord
+    else {
+      response.json(newTodo)
+    }
+    
   })
 })
 
-//delete one
-apiRouter.delete('/posts/:_id', (req,res) => {
-  Post.remove(req.params,(err) => {
-    res.status(204).json({msg: "record successfully deleted",
-      _id: req.params._id})
-  })
-})
+
+// apiRouter.get('/todos',function(request,response) {
+//   //first argument gives the criteria (WHICH msgs do i want)
+//   Msg.find({},function(err,records) {
+//     response.json(records)
+//   })
+// })  
+
+// apiRouter.post('/messages',function(request,response) {
+//   let newRecord = new Msg(request.body)
+//   newRecord.save(function(err) {
+//     if (err) {
+//       console.log(err)
+//       response.send(err)
+//     }
+//     else {
+//       response.json(newRecord)
+//     }
+//   })
+// })
 
 module.exports = apiRouter
