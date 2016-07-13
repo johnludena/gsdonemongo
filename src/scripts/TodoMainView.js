@@ -11,7 +11,7 @@ const TodoMainView = React.createClass({
     },
     
     componentWillMount: function(){
-        this.props.todoColl.on('sync', () => { 
+        this.props.todoColl.on('sync update', () => { 
             this.setState({
                 todoColl: this.state.todoColl
                
